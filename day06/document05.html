@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체를 동적으로 생성, 삽입, 삭제</title>
+</head>
+
+<body>
+    <p>DOM 트리에 동적으로 객체를 삽입할 수 있다.</p>
+    <p>createElement("태그명"), appendChild("태그 객체"), removeChild("태그 객체")</p>
+    <p>위 3개의 메소드를 이용해서 새로운 객체를 생성, 삽입, 삭제한다.</p>
+    <a href="javascript:createDIV()">DIV 생성</a>
+</body>
+<script>
+    let i = 1;
+
+    function createDIV() {
+        //div 객체 생성 <div></div>
+        const newDiv = document.createElement("div");
+        // 입력한 값은 'value'로 가져와야하고
+        // 미리 작성해 놓은 값은 'innerHTML'로 가져와야한다.
+        newDiv.innerHTML =i++ +  "새로 생성된 DIV입니다.";
+        newDiv.style.backgroundColor = 'pink';
+        
+        // a객체 누르면 newDIV 실행
+        document.body.appendChild(newDiv);
+
+        newDiv.onclick = function(){
+            document.body.removeChild(this);
+        };
+
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>jQuery 기초 예제</title>
+</head>
+<body>
+    <ul class="car">
+        <li>람보르기니</li>
+        <li>포르쉐</li>
+        <li id="tico">티코</li>
+        <li>재규어</li>
+        <li>테슬라</li>
+    </ul>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+    const $lists = $("li"); //li 다 가져옴
+    const $ul = $(".car"); //ul 다 가져옴
+
+    console.log($lists);
+    console.log($lists[0]);
+    console.log($($lists[0]).text()); //js객체를 $()으로감싸면 jQuery객체가 됨
+
+   console.log($ul.children());
+   $ul.children().first() //.children() : 하위 다 가져옴, .first() : 첫번째 객체 가져옴
+   $ul.children().first().text("벤틀리"); //ul의 첫번째 객체가 변경된다.
+   $ul.children().last().text("k5");
+
+//    closest() : 부모에서 찾기
+//    find() : 자식에서 찾기
+
+console.log($lists[3].closest("body"));
+console.log($ul.find("#tico"));
+
+console.log($($lists[0]).next());
+console.log($($lists[0]).next().text());
+
+// 티코 삭제
+$(document.body).find("#tico").remove();
+$ul.children("#tico").remove();
+
+// 티코 추가
+$ul.append("<li>티코</li>");
+
+// 벤트 3번째에 추가
+$ul.children().eq(2).before('<li>벤츠</li>');
+
+// 속성 가져오기
+console.log($ul.attr("class"));
+
+// 속성 값 수정하기
+console.log($ul.attr("class","supercar"));
+
+// 스타일
+$ul.children().last().css('color','blue');
+
+
+</script>
+</html>

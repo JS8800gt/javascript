@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬라이드 배너</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <section class="container">
+        <div class="arrow prev">&lt;</div>
+        <div class="banner">
+            <div><img src="img/001.png"></div>
+            <div><img src="img/002.png"></div>
+            <div><img src="img/003.png"></div>
+            <div><img src="img/004.png"></div>
+            <div><img src="img/005.png"></div>
+            <div><img src="img/006.png"></div>
+        </div>
+        <div class="arrow next">&gt;</div>
+        <div class="btns">
+            <button class="btn"></button>
+            <button class="btn"></button>
+            <button class="btn"></button>
+            <button class="btn"></button>
+            <button class="btn"></button>
+            <button class="btn"></button>
+        </div>
+    </section>
+</body>
+<script>
+    const div = document.querySelector("div.banner");
+    const arrows = document.querySelectorAll("div.arrow");
+    const btns = document.querySelectorAll(".btn");
+    const firstDiv = document.createElement("div");
+    const lastDiv = document.createElement("div");
+    var count = 0;
+    var buttonCheck = true;
+    var numberButtonCheck = true;
+    var temp = btns[count];
+    
+    firstDiv.innerHTML = `<img src="img/006.png">`;
+    div.insertBefore(firstDiv, document.querySelector("div.banner div"));
+
+    lastDiv.innerHTML = `<img src="img/001.png">`;
+    div.appendChild(lastDiv);
+
+    div.style.transform = "translate(-90vw)";
+
+    btns[0].style.background = "black";
+
+    let inter = setInterval(autoSlide, 2500);
+
+    // function autoSlide(){
+    //     count ++;
+    //     if(count == 6){
+    //         count = 0;
+    //     }
+    //     div.style.transform = "translate(-" + 90 * count +"vw)"
+    //     div.style.transition = "transform 0.5s";
+    // }
+
+    function autoSlide(){
+        div.style.transition = "transform 0.5s";
+        count ++;
+        if(count == 6){ // 마지막 배너(6번)
+            btns[count - 1].style.background = "white";
+            div.style.transform = "translate(-" + 90 * (count + 1) +"vw)"
+            count = 0;
+            btns[count].style.background = "black";
+            setTimeout(function(){
+                div.style.transition = "transform 0s";
+                div.style.transform = "translate(-90vw)";
+            }, 500);
+        }else{
+            btns[count - 1].style.background = "white";
+            btns[count].style.background = "black";
+            div.style.transition = "transform 0.5s";
+            div.style.transform = "translate(-" + 90 * (count + 1) +"vw)"
+        }
+        temp = btns[count];
+    }
+
+    // 이전버튼, 다음버튼
+    arrows.forEach(arrow => {
+        arrow.addEventListener("click", function(){
+            if(buttonCheck){
+                buttonCheck = false;
+                let arrowType = arrow.classList[1];
+                clearInterval(inter);
+                div.style.transition = "transform 0.5s";
+                if(arrowType == "prev"){
+                    count --;
+                    if(count == -1){
+                        div.style.transform = "translate(0vw)";
+                        setTimeout(function(){
+                            div.style.transition = "transform 0s";
+                            div.style.transform = "translate(-540vw)";
+                        }, 500);
+                        count = 5;
+                    }else{
+                        div.style.transform = "translate(-" + 90 * (count + 1) + "vw)";
+                    }
+
+                }else{
+                    count ++;
+                    if(count == 6){
+                        div.style.transform = "translate(-" + 90 * (count + 1) + "vw)";
+                        setTimeout(function(){
+                            div.style.transition = "transform 0s";
+                            div.style.transform = "translate(-90vw)";
+                        }, 500);
+                        count = 0;
+                    }else{
+                        div.style.transform = "translate(-" + 90 * (count + 1) + "vw)";
+                    }
+                }
+                temp.style.background = "white";
+                temp = btns[count];
+                btns[count].style.background = "black";
+                inter = setInterval(autoSlide, 2500);
+
+                setTimeout(()=>{buttonCheck = true}, 500);
+            }
+        });
+    });
+    // arrows.forEach(arrow => {
+    //     arrow.addEventListener("click", function(){
+    //         let arrowType = arrow.classList[1];
+    //         if(arrowType == "prev"){
+    //             count --;
+    //             if(count == -1){
+    //                 count = 5;
+    //             }
+
+    //         }else{
+    //             count ++;
+    //             if(count == 6){
+    //                 count = 0;
+    //             }
+    //         }
+
+    //         div.style.transform = "translate(-" + 90 * count +"vw)"
+
+    //     });
+    // });
+
+    // 원하는 번호의 배너로 이동
+    // btns.forEach((btn, i) => {
+    //     btn.addEventListener("click", function(){
+    //         count = i;
+    //         div.style.transform = "translate(-" + 90 * count +"vw)"
+    //     });
+    // });
+
+    btns.forEach((btn, i) => {
+        btn.addEventListener("click", function(){
+            div.style.transition = "transform 0.5s";
+            if(numberButtonCheck){
+                numberButtonCheck = false;
+                clearInterval(inter);
+                count = i;
+                div.style.transform = "translate(-" + 90 * (count + 1) +"vw)"
+                temp.style.background = "white";
+                temp = btns[count];
+                btns[count].style.background = "black";
+                inter = setInterval(autoSlide, 2500);
+                setTimeout(() => {numberButtonCheck = true}, 500);
+            }
+        });
+    });
+
+</script>
+</html>

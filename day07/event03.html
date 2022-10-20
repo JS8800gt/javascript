@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>첨부파일 썸네일</title>
+    <style>
+        label[for='attach'] div {
+            width: 150px;
+            height: 150px;
+            background-image: url("attach.png");
+            /* 상대 경로 입력 */
+            /* background-image줄땐 width height 먼저 정해주고 url("")안에 */
+            background-size: 100%;
+            /* 이 이미지는 div요소에 100%로 맞추겠다 */
+            background-repeat: no-repeat;
+            /* 공간이 남으면 반복되므로 '반복 안하겠다' 설정 */
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <label for="attach">
+        <div></div>
+    </label>
+    <input type="file" id="attach" style="display: none;">
+</body>
+<script>
+    const file = document.querySelector("input[type='file']");
+    /* input 중 type이 file을 가져옴(업로드한 파일은 input객체의 프로퍼티에 존재한다.) */
+    /* change : '해당 객체에 변화가 있을때(파일이 업로드 되었을 때)' 라는 이벤트 
+                .addEventListener("change", function(){}) */
+    file.addEventListener("change", function (e) { /* 업로드된 파일의 정보가 change이벤트 객체에 들어가 있음(e) */
+        var reader = new FileReader(); /* reader객체 생성 */
+        reader.readAsDataURL(e.target.files[0]); 
+        /* 업로드한 파일을 읽어와서 암호화된 url정보를 얻을 수 있다. 전달한 파일을 가지고 그 파일의 절대 경로를 읽어옴*/
+        /* 파일의 정보는 이벤트 객체(e)의 .target.files[0]*/
+        /* FileList의 객체 event.target.files */
+        reader.onload = function (e) { /* 전달받은 파일정보를 모두 로딩했을때, 암호화된 절대 경로를 가져와서 */
+            /* 절대 경로가 들어있음 */
+            let url = e.target.result;/* 절대 경로 */
+            if(url.includes("image")){/* 만약 url이 image를 포함한다면(업로드 된 파일이 이미지인지 검사) */
+            document.querySelector("label div").style.backgroundImage = "url(" + url + ")";
+            /* div를 가져와서 style을 사용하여 style.backgroundImage="url("+url+")"로 바꿔준다. */
+            /* url을 인식하여 가져와서 기존의 파일에서 업로드 파일(썸네일)로 바꿔줌 */
+        }else{
+                document.querySelector("label div").style.backgroundImage = "url(no-image.jpg)";
+                /* 만약 이미지 파일이 아니라면 미리 준비해둔 이미지를 띄워줌(ex) no-image */
+            }
+        }
+        /* onload : '로딩이 됬을 때' 이벤트*/
+        /* e.target.files[0]의 byte를 읽어옴 다 읽어 왔을때 onload 이벤트가 실행된다.*/
+        /* console로 업로드 후 file -> target-> result(암호화방식) e.target.result<<(절대 경로)를 불러준다. */
+    });
+/* 
+ const file = document.querySelector("input[type='file']");
+ file.addEventListener("change", function (e) {
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+     reader.onload = function (e) {
+         let url = e.target.result;
+         if(url.includes("image")){
+         document.querySelector("label div").style.backgroundImage = "url(" + url + ")";
+         }else{
+                document.querySelector("label div").style.backgroundImage = "url(no-image.jpg)";
+         }
+         }
+        });
+ */
+</script>
+
+</html>

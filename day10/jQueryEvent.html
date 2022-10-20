@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>jQuery 이벤트</title>
+</head>
+
+<body>
+    <ul class="dessert">
+        <li>타르트</li>
+        <li>호두과자</li>
+        <li>푸딩</li>
+        <li>마카롱</li>
+        <li>아이스크림</li>
+        <li>초콜릿</li>
+        <li>델리만쥬</li>
+        <li>핫바</li>
+        <li>케이크</li>
+        <li>호빵</li>
+        <li>붕어빵</li>
+        <li>스콘</li>
+        <li>군고구마</li>
+        <li>애플망고옥수수</li>
+    </ul>
+    <div style="cursor: pointer;">눌러보세요!</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+    let $div =$("ul").next();
+    let $ul = $("div").prev();
+
+    $div.on("click",function(){
+        // $ul.hide(2000); //hide(n) : n초 동안 눌렀을때 사라져라
+        // $ul.show(2000); //show(n) : n초 후에 눌렀을때 나타나라
+        // $ul.toggle();
+        // $ul.slideDown();
+        // $ul.slideUp();
+        // $ul.slideToggle();
+        // $ul.fadeOut();
+        // $ul.fadeIn();
+        $ul.fadeToggle();
+    });
+</script>
+</html>

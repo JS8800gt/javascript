@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM트리 실습</title>
+</head>
+
+<body>
+    <ul>
+        <li>호랑이</li>
+        <li>하마</li>
+        <li>코끼리</li>
+        <li>악어</li>
+        <li>알파카</li>
+    </ul>
+    <a href="javascript:addAnimal()">동물 추가</a>
+</body>
+<script>
+    let i = 0;
+    let animals = new Array("고양이", "토끼", "사자");
+    const ul = document.querySelector("ul");
+
+    // 해당 동물을 클릭하면 해당 동물 삭제
+    document.querySelectorAll("ul li").forEach(v => {
+        v.onclick = function () {
+            ul.removeChild(this);
+        }
+    });
+    // 동물 추가 버튼을 클릭하면 동물 추가(최대 3마리, 3마리 동물은 중복되지 않는다.)
+    function addAnimal() {
+        const li = document.createElement("li");
+        li.innerHTML = animals[i++];
+        ul.appendChild(li);
+        li.onclick = function () {
+            i--;
+            ul.removeChild(this);
+            document.querySelector("a").setAttribute("href", "javascript:addAnimal()");
+        }
+        if (i == 3) {
+            document.querySelector("a").setAttribute("href", "javascript:void(0)");
+        }
+    }

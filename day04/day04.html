@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방문 시간에 따라 변하는 배경</title>
+</head>
+
+<body>
+    <h3>방문 시간에 따라 변하는 배경</h3>
+    <hr>
+    <!-- 방문 시간의 초가 짝수일 때와 홀수일 때의 배경색으로 변경시킨다. -->
+
+
+
+</body>
+<script>
+    // setInterval(callback, 밀리초) : 전달한 밀리초마다 callback함수 실행
+    // setTImeout(callback, 밀리초) : 전달한 밀리초 후에 callback 함수 실행
+    // clearinterval(interval 고유번호) : 전달한 interval이 즉시 종료된다.
+    var interval = setInterval(function(){
+        var sec = new Date();
+        document.body.style.background = sec.getSeconds() % 2 == 0 ? "yellow" : "red";
+        //document: body is not defined 해결법
+        //setInterval(function(){},밀리초);
+    },1000);
+
+    setTimeout(function(){
+        clearInterval(interval);
+        //interval을 멈춰줌
+
+    },3000);
+</script>
+
+</html>

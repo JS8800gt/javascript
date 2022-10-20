@@ -1,0 +1,43 @@
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 50%;
+    margin: 0 auto;
+}
+h3{
+    text-align: center;
+}
+
+td,
+th {
+    border: 1px solid black;
+    text-align: center;
+    
+}
+
+.field {
+    
+    margin: 0 auto;
+}
+
+
+
+.leg{
+    margin: 0 auto;
+    
+    
+}
+.box{
+    position: absolute;
+    margin: 0 0 0 60px;
+    
+}
+.btn{
+    position: absolute;
+    margin: -2px 0 0 235px;
+}
+.fs{
+    margin: 0 auto;
+    width: 350px;
+    height: 40px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>변수</title>
+</head>
+
+<body>
+    <script>
+        console.log(b);
+        var b = 5;
+        // 위와 아래는 같은 말
+        var a;
+        console.log(a);
+        a = 5;
+
+        
+        // console.log(c); ----- 참조 오류
+        let c = 5;
+
+        let d;
+        console.log(d); //undefined
+        d = 10;
+        console.log(d); // 10
+
+        const e = 10;
+        e = 15;
+        console.log(e);
+    </script>
+</body>
+
+</html>
